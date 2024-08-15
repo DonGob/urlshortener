@@ -1,0 +1,27 @@
+<h1>URL shortener</h1>
+
+<p>please fill in the url to shorten and optionally a shortcode consisting of 6 alphanumeric characters (including underscores)</p>
+
+<form action="{% url 'shorten_post' %}" method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <label for="original_url">fill in your url: </label>
+        <input id="original_url" type="text" name="url" value="https://www.">
+    </fieldset>
+    <fieldset>
+        <label for="shortcode">fill in your shortcode (optional): </label>
+        <input id="shortcode" type="text" name="shortcode" pattern="^([\w]{6})?$" title="Leave blank for random shortcode or enter a code that has 6 characters and only contains alphanumeric characters or underscores">
+    </fieldset>
+    <input type="submit" value="Shorten">
+    </form>
+
+<p>please fill shortcode you want to be redirected with</p>
+
+<form action="{% url 'handle_shortcode_request' %}" method="GET">
+    <fieldset>
+        <label for="existing_shortcode">fill in your shortcode: </label>
+        <input id="existing_shortcode" type="text" name="shortcode">
+    </fieldset>
+    <input type="submit" name="request_type" value="redirect">
+    <input type="submit" name="request_type" value="stats">
+    </form>
